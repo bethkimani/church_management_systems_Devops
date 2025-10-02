@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: church_db
+      POSTGRES_USER: church_user
+      POSTGRES_PASSWORD: churchpass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DB_NAME: church_db
+      DB_USER: church_user
+      DB_PASSWORD: churchpass123
+      DB_HOST: db
+      DJANGO_SECRET_KEY: your-secure-key-here
+      DJANGO_DEBUG: 'True'
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app  # For dev hot-reload
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
