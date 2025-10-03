@@ -1,1 +1,6 @@
 backend/venv/
+# Ignore Terraform provider binaries and lock files
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
