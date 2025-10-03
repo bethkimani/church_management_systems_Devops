@@ -4,6 +4,7 @@ backend:
   image: "228449306376.dkr.ecr.us-east-1.amazonaws.com/church-backend"
   tag: "latest"
   port: 8000
+  allowedHosts: "backend-service,church-eks-cluster-postgres.c0zsssao0dnu.us-east-1.rds.amazonaws.com"
   resources:
     requests:
       cpu: 100m
@@ -18,7 +19,7 @@ frontend:
   port: 3000
   type: LoadBalancer  # Exposes externally
 
-rds_endpoint: "church-eks-cluster-postgres.c0zsssao0dnu.us-east-1.rds.amazonaws.com:5432"  # e.g., church-eks-cluster-postgres.abcd123.us-east-1.rds.amazonaws.com:5432
+rds_endpoint: "church-eks-cluster-postgres.c0zsssao0dnu.us-east-1.rds.amazonaws.com:5432"
 
 hpa:
   minReplicas: 2
