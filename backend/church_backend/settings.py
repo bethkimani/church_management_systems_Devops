@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'members.apps.MembersConfig',  # Updated to reference the correct app
+    'members',  # Changed from 'members.apps.MembersConfig'
 ]
 
 MIDDLEWARE = [
