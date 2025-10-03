@@ -5,7 +5,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-your-temp-key-change-in-prod')
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
-ALLOWED_HOSTS = ['*'] if DEBUG else []
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',') if DEBUG else os.environ.get('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'members',
+    'members.apps.MembersConfig',  # Updated to reference the correct app
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'church_backend.wsgi.application'
 
-# PostgreSQL Config (Local: Use env vars in prod)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
